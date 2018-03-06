@@ -50,5 +50,7 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>TravelRecordApp</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need access to your location to improve the app experience</string>
 </dict>
 </plist>
