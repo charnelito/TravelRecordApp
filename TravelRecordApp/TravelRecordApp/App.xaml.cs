@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,13 @@ namespace TravelRecordApp
 	public partial class App : Application
 	{
         public static string DatabaseLocation = string.Empty;
-		public App ()
+
+        public static MobileServiceClient MobileService =
+            new MobileServiceClient(
+            "https://mytravelrecordapp.azurewebsites.net"
+        );
+
+        public App ()
 		{
 			InitializeComponent();
 
