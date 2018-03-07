@@ -26,6 +26,10 @@ namespace TravelRecordApp
             {
                 var postTable = conn.Table<Post>().ToList();
 
+                var categories = (from p in postTable
+                                  orderby p.CategoryId
+                                  select p.CategoryName).Distinct().ToList();
+
                 postCountLabel.Text = postTable.Count.ToString();
             }
         }
