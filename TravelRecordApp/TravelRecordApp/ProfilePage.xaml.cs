@@ -30,6 +30,8 @@ namespace TravelRecordApp
                                   orderby p.CategoryId
                                   select p.CategoryName).Distinct().ToList();
 
+                var categories2 = postTable.OrderBy(p => p.CategoryId).Select(p => p.CategoryName).Distinct().ToList();
+
                 Dictionary<string, int> categoriesCount = new Dictionary<string, int>();
                 foreach (var category in categories)
                 {
@@ -37,8 +39,12 @@ namespace TravelRecordApp
                                  where post.CategoryName == category
                                  select post).ToList().Count;
 
+                    var count2 = postTable.Where(p => p.CategoryName == category).ToList().Count;
+
                     categoriesCount.Add(category, count);
                 }
+
+                categoriesListView.ItemsSource = categoriesCount;
 
                 postCountLabel.Text = postTable.Count.ToString();
             }
