@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using TravelRecordApp.Model;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
@@ -16,6 +16,8 @@ namespace TravelRecordApp
             new MobileServiceClient(
             "https://mytravelrecordapp.azurewebsites.net"
         );
+
+        public static User user = new User();
 
         public App ()
 		{
