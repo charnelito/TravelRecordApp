@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.IO;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace TravelRecordApp.Droid
 {
@@ -23,6 +24,7 @@ namespace TravelRecordApp.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             Xamarin.FormsMaps.Init(this, bundle);
+            CurrentPlatform.Init();
 
             string dbName = "travel_db_sqlite";
             string folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
