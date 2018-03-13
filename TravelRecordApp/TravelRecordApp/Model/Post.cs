@@ -79,9 +79,9 @@ namespace TravelRecordApp.Model
             }
         }
 
-        private string latitude;
+        private double latitude;
 
-        public string Latitude
+        public double Latitude
         {
             get { return latitude; }
             set
@@ -91,9 +91,9 @@ namespace TravelRecordApp.Model
             }
         }
 
-        private string longitude;
+        private double longitude;
 
-        public string Longitude
+        public double Longitude
         {
             get { return longitude; }
             set
@@ -103,9 +103,9 @@ namespace TravelRecordApp.Model
             }
         }
 
-        private string distance;
+        private int distance;
 
-        public string Distance
+        public int Distance
         {
             get { return distance; }
             set
@@ -161,7 +161,8 @@ namespace TravelRecordApp.Model
 
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

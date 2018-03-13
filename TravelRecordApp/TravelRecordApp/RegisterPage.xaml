@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TravelRecordApp.RegisterPage">
-    <StackLayout VerticalOptions="Center"
+    <StackLayout x:Name="containerStackLayout"  
+                 VerticalOptions="Center"
                  Margin="20">
         <Entry x:Name="emailEntry" 
                Placeholder="Email Address"
                TextColor="{StaticResource blueColor}"
-               Text=""
+               Text="{Binding Email, Mode=TwoWay}"
                Keyboard="Email"/>
         <Entry x:Name="passwordEntry" 
                Placeholder="Password"
                TextColor="{StaticResource blueColor}"
-               Text=""
+               Text="{Binding Password, Mode=TwoWay}"
                IsPassword="True"/>
         <Entry x:Name="confirmPasswordEntry" 
                Placeholder="Confirm Password"
