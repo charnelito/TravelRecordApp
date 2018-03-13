@@ -1,28 +1,133 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TravelRecordApp.Model
 {
-    public class Post
+    public class Post : INotifyPropertyChanged
     {
-        [PrimaryKey, AutoIncrement]
-        public string Id { get; set; }
+        private string id;
 
-        [MaxLength(250)]
-        public string Experience { get; set; }
+        public string Id
+        {
+            get { return id; }
+            set {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
 
-        public string VenueName { get; set; }
-        public string CategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public string Address { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public int Distance { get; set; }
-        public string UserId { get; set; }
+        private string experience;
+
+        public string Experience
+        {
+            get { return experience; }
+            set {
+                experience = value;
+                OnPropertyChanged("Experience");
+            }
+        }
+
+        private string venueName;
+
+        public string VenueName
+        {
+            get { return venueName; }
+            set {
+                venueName = value;
+                OnPropertyChanged("VenueName");
+            }
+        }
+
+        private string categoryId;
+
+        public string CategoryId
+        {
+            get { return categoryId; }
+            set
+            {
+                categoryId = value;
+                OnPropertyChanged("CategoryId");
+            }
+        }
+
+        private string categoryName;
+
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
+                categoryName = value;
+                OnPropertyChanged("CategoryName");
+            }
+        }
+
+        private string address;
+
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                address = value;
+                OnPropertyChanged("Address");
+            }
+        }
+
+        private string latitude;
+
+        public string Latitude
+        {
+            get { return latitude; }
+            set
+            {
+                latitude = value;
+                OnPropertyChanged("Latitude");
+            }
+        }
+
+        private string longitude;
+
+        public string Longitude
+        {
+            get { return longitude; }
+            set
+            {
+                longitude = value;
+                OnPropertyChanged("Longitude");
+            }
+        }
+
+        private string distance;
+
+        public string Distance
+        {
+            get { return distance; }
+            set
+            {
+                distance = value;
+                OnPropertyChanged("Distance");
+            }
+        }
+
+        private string userId;
+
+        public string UserId
+        {
+            get { return userId; }
+            set
+            {
+                userId = value;
+                OnPropertyChanged("UserId");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public static async void Insert(Post post)
         {
@@ -31,7 +136,7 @@ namespace TravelRecordApp.Model
 
         public static async Task<List<Post>> Read()
         {
-            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.id).ToListAsync();
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.user.Id).ToListAsync();
             return posts;
         }
 
@@ -52,6 +157,11 @@ namespace TravelRecordApp.Model
             }
 
             return categoriesCount;
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
