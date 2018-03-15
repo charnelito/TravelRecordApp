@@ -20,7 +20,7 @@ namespace TravelRecordApp.ViewModel
             }
         }
 
-
+        public RegisterNavigationCommand RegisterNavigationCommand { get; set; }
         public LoginCommand LoginCommand { get; set; }
 
         private string email;
@@ -68,6 +68,7 @@ namespace TravelRecordApp.ViewModel
         {
             User = new User();
             LoginCommand = new LoginCommand(this);
+            RegisterNavigationCommand = new RegisterNavigationCommand(this);
         }
 
         public async void Login()
@@ -78,6 +79,11 @@ namespace TravelRecordApp.ViewModel
                 await App.Current.MainPage.Navigation.PushAsync(new HomePage());
             else
                 await App.Current.MainPage.DisplayAlert("Error", "Try again", "Ok");
+        }
+
+        public async void Navigate()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new RegisterPage());
         }
 
     }
