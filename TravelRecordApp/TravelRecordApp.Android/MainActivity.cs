@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using System.IO;
 using Microsoft.WindowsAzure.MobileServices;
+using Plugin.Permissions;
 
 namespace TravelRecordApp.Droid
 {
@@ -32,6 +33,12 @@ namespace TravelRecordApp.Droid
             string fullPath = Path.Combine(folderPath, dbName);
 
             LoadApplication(new App(fullPath));
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

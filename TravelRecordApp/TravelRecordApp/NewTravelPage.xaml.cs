@@ -1,4 +1,6 @@
 ﻿using Plugin.Geolocator;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -30,11 +32,38 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
-            var locator = CrossGeolocator.Current;
-            var position = await locator.GetPositionAsync();
+            try
+            {
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Location);
+                if (status != PermissionStatus.Granted)
+                {
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+                    {
+                        await DisplayAlert("Need Permission","We will have to access your location","Ok");
+                    }
 
-            var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
-            venueListView.ItemsSource = venues;
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                    if (results.ContainsKey(Permission.Location))
+                        status = results[Permission.Location];
+                }
+
+                if (status == PermissionStatus.Granted)
+                {
+                    var locator = CrossGeolocator.Current;
+                    var position = await locator.GetPositionAsync();
+
+                    var venues = await Venue.GetVenues(position.Latitude, position.Longitude);
+                    venueListView.ItemsSource = venues;
+                }
+                else
+                {
+                    await DisplayAlert("Need Permission", "We will have to access your location", "Ok");
+                }
+   
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         //private async void ToolbarItem_Clicked(object sender, EventArgs e)
