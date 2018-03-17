@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TravelRecordApp.Logic;
 using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,13 +16,13 @@ namespace TravelRecordApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NewTravelPage : ContentPage
 	{
-        Post post;
+        NewTravelVM viewModel;
 		public NewTravelPage ()
 		{
 			InitializeComponent ();
 
-            post = new Post();
-            containerStackLayout.BindingContext = post;
+            viewModel = new NewTravelVM();
+            BindingContext = viewModel;
 
         }
 
@@ -36,23 +37,12 @@ namespace TravelRecordApp
             venueListView.ItemsSource = venues;
         }
 
-        private async void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                var selectedVenue = venueListView.SelectedItem as Venue;
-                var firstCategory = selectedVenue.categories.FirstOrDefault();
-
-                post.CategoryId = firstCategory.id;
-                post.CategoryName = firstCategory.name;
-                post.Address = selectedVenue.location.address;
-                post.Distance = selectedVenue.location.distance;
-                post.Latitude = selectedVenue.location.lat;
-                post.Longitude = selectedVenue.location.lng;
-                post.VenueName = selectedVenue.name;
-                post.UserId = App.user.Id;
+        //private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+                //var selectedVenue = venueListView.SelectedItem as Venue;
            
-
                 /*using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
                 {
                     conn.CreateTable<Post>();
@@ -65,18 +55,18 @@ namespace TravelRecordApp
                 }*/
 
                 //await App.MobileService.GetTable<Post>().InsertAsync(post);
-                Post.Insert(post);
-                await DisplayAlert("Success", "Experience successfully inserted", "OK");
-            }
-            catch (NullReferenceException nre)
-            {
-                await DisplayAlert("Failure", "Experience failed to be inserted", "OK");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Failure", "Experience failed to be inserted", "OK");
-            }
+                //Post.Insert(post);
+            //    await DisplayAlert("Success", "Experience successfully inserted", "OK");
+            //}
+            //catch (NullReferenceException nre)
+            //{
+            //    await DisplayAlert("Failure", "Experience failed to be inserted", "OK");
+            //}
+            //catch (Exception ex)
+            //{
+            //    await DisplayAlert("Failure", "Experience failed to be inserted", "OK");
+            //}
 
-        }
+        //}
     }
 }
