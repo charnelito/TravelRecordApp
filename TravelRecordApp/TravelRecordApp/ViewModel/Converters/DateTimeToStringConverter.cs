@@ -22,9 +22,9 @@ namespace TravelRecordApp.ViewModel.Converters
                 if (difference.TotalSeconds < 60)
                     return $"{difference.TotalSeconds:0} seconds ago.";
                 if (difference.TotalMinutes < 60)
-                    return $"{difference.TotalMinutes:0} minutes ago.";
+                    return $"{difference.TotalMinutes:0} minute(s) ago.";
                 if (difference.TotalHours < 24)
-                    return $"{difference.TotalHours:0} hours ago.";
+                    return $"{difference.TotalHours:0} hour(s) ago.";
 
                 return "yesterday";
             }
